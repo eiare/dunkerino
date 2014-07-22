@@ -1,0 +1,314 @@
+
+<!doctype html>
+<html lang="en" id="ng-app" data-framework="angularjs">
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Discover Random Live Twitch Streams with Dunkerino!</title>
+
+		<!-- <link rel="icon" type="image/x-icon" href=""> -->
+		<link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+		<link rel="stylesheet" href="http://cdn.foundation5.zurb.com/foundation.css" />
+		<!-- <link rel="stylesheet" href="style/css/font-awesome.css" /> -->
+
+		<style type="text/css">
+			body {background-color: #ededed}
+			#headerContainer {padding: 24px 0;background-color: #d6d6d6; margin-bottom:24px;}
+			.fullWidth {
+			   width: 100%;
+			   margin-left: auto;
+			   margin-right: auto;
+			   max-width: 1400px;
+			}
+			.twitch-connect {cursor: pointer;}
+			.button.purple {background: #6441a5;}
+			.button.purple:hover {background: #7550ba;}
+		</style>
+
+	</head>
+	<body>
+
+		<div id="headerContainer">
+			<div class="row fullWidth">
+			    <div class="large-7 columns">
+			      <h1>
+			      	<img src="random-twitch-stream.png"/>
+			      </h1>
+			    </div>
+			    <div class="large-5 columns">
+			      <ul class="inline-list right">
+			        <li  style="padding-top:2px">
+			        	<a href="https://twitter.com/EiareGaming"><span style="color:#222">Created by </span>@EiareGaming</a>
+			        </li>
+			        <li>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-related="eiare" data-lang="en" data-size="large" data-count="none" data-text="Discover random streams on #Twitch with DUNKERINO. It's like chat roulette for Twitch. #GetDunked @eiare">Tweet This!</a>
+			        </li>
+			      </ul>
+			    </div>
+			</div>
+		</div>
+
+		<div id="connectContainer" class="row fullWidth">
+			<div data-alert class="alert-box info radius">
+			  <img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png" class="twitch-connect" href="#" />
+			   Connect Dunkerino with your Twitch account to enable chat and the follow button!
+			  <a href="#" class="close close-connectContainer">&times;</a>
+			</div>
+		</div>
+
+		<div id="streamContainer">
+
+		</div>
+
+		<!-- <script data-main="app/core/AMD" src="lib/require.2.1.11.js"></script> -->
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
+		<script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+
+		<script>
+		/*
+		var tbNumChannels,
+			tbRandomStream;
+
+			function getRandomInt(min, max) {
+			    return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+
+			Twitch.init({clientId: 'rqy445x0yuc3m8l6x62kt7nvm7u7dx'}, function(error, status) {
+			    // the sdk is now loaded
+
+			    if (status.authenticated) {
+					// Already logged in, hide button
+					$('.twitch-connect').hide()
+				}
+			});
+
+			$('.twitch-connect').click(function() {
+				Twitch.login({
+					scope: ['user_read', 'channel_read']
+				});
+			});
+
+*/
+			/////////////////////////////////////////////////////////
+
+			// Twitter button code
+			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+
+			var TB = (function ($) {
+				 
+				// privates
+				var clientId = 'rqy445x0yuc3m8l6x62kt7nvm7u7dx',
+					numChannels,
+					randomStream,
+					twitchStatus;
+				
+				function getRandomInt(min, max) {
+			    	return Math.floor(Math.random() * (max - min + 1)) + min;
+				}
+
+				function clearHtml(element) {
+					$(element).html(' ');
+				}
+
+				// Follow button
+				//		1. Build
+				//			Connected? Show Follow or Unfollow (ajax call)
+				//				--> Click -> Follow or UNfollow (ajax) & update text
+
+				function followButton() {
+
+					if (!twitchStatus){
+						$('#followButton').addClass("disabled");
+						$('#followButton').off('click');
+						$('#followButton').on('click', function() {
+						    $('#connectContainer').show();
+						});
+					} else {
+						$('#followButton').removeClass("disabled");
+
+						Twitch.api({method: 'user'}, function(error, channel) {
+							var channelName = randomStream.channel.display_name,
+								userName    = channel.display_name,
+								isFollowing;
+
+							Twitch.api({method: '/users/' + userName + '/follows/channels/' + channelName }, function(error, channel) {
+								isFollowing = channel;
+								if (!isFollowing) {
+								  	$('#followButton').html("Follow");
+								} else {
+								  	$('#followButton').html("Unfollow");
+								}
+								$('#followButton').off('click');
+								$('#followButton').on('click', function() {
+									console.log("isFollowing = " + isFollowing);
+								  if (!isFollowing) {
+								    Twitch.api({method: '/users/' + userName + '/follows/channels/' + channelName, params: {'_method' : 'put'} }, function(error, channel) {
+							  			$('#followButton').html("Unfollow");
+							  			isFollowing = true;
+							  			console.log("clicked to ;ollow")
+							  		});
+								  } else {
+								    Twitch.api({method: '/users/' + userName + '/follows/channels/' + channelName, params: {'_method' : 'delete'} }, function(error, channel) {
+							  		});
+							  		isFollowing = false;
+							  		$('#followButton').html("Follow");
+								  }
+								}); // onclick end
+							  }); // end twitch.api
+							
+						});
+
+						// GET https://api.twitch.tv/kraken/users/test_user1/follows/channels/test_channel
+					}
+
+					return '';
+				}
+
+				function getRandomStream() {
+					$.ajax({
+				            url:         'https://api.twitch.tv/kraken/streams/summary',
+				            headers:     { "Client-ID" : clientId },
+				            type:        'GET',
+				            contentType: 'application/json',
+				            dataType:    'jsonp',
+
+				            success: function(data) {
+				            	numChannels = data.channels;
+			            	}
+
+					}).done(function() {
+					    $.ajax({
+				            url:         'https://api.twitch.tv/kraken/streams?limit=100&offset=' + getRandomInt(0, numChannels - 100),
+				            headers:     { "Client-ID" : clientId },
+				            type:        'GET',
+				            contentType: 'application/json',
+				            dataType:    'jsonp',
+
+				            success: function(data) {
+				            	randomStream = data.streams[Math.floor(Math.random()*data.streams.length)];
+				              	
+				              	console.log(
+				              		getRandomInt(0, numChannels - 100)
+				              	);
+
+				              	console.log(
+				              		randomStream
+				              	);
+
+				              	//$( "body" ).append( '<iframe id="player" type="text/html" width="820" height="578" src="http://www.twitch.tv/' + randomStream.channel.name + '" frameborder="0"></iframe>' );
+				            	$( "#streamContainer" ).append(
+				            		'<div class="row fullWidth"> ' +
+	    							'<div class="large-12 columns"> ' +
+	    							'<h4>' + randomStream.channel.status + '' +
+	    							'<small style="font-size:70%;margin-left: 20px;">' +
+	    							'	<span class=""><a href="' + randomStream.channel.url + '">' + randomStream.channel.display_name + '</a></span>' +
+	    							'	<span class=""> playing </span>' +
+	    							'	<span class="">' + randomStream.channel.game + '</span>' +
+	    							'</small></h4>' +
+	    							'</div> ' +
+	    							'</div> ' +
+				            		'<div class="row fullWidth" style="margin-bottom:32px"> ' +
+	    							'<div class="large-9 columns"> ' +
+				            		'<object type="application/x-shockwave-flash" ' +
+									'        height="440" ' +
+									'        width="100%" ' +
+									'        id="live_embed_player_flash" ' +
+									'        data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=' + randomStream.channel.name + ' " ' +
+									'        bgcolor="#000000"> ' +
+									'  <param  name="allowFullScreen" ' +
+									'          value="true" /> ' +
+									'  <param  name="allowScriptAccess" ' +
+									'          value="always" /> ' +
+									'  <param  name="allowNetworking" ' +
+									'          value="all" /> ' +
+									'  <param  name="movie" ' +
+									'          value="http://www.twitch.tv/widgets/live_embed_player.swf" /> ' +
+									'  <param  name="flashvars" ' +
+									'          value="hostname=www.twitch.tv&channel=' + randomStream.channel.name + '&auto_play=true&start_volume=100" /> ' +
+									'</object> ' +
+									'</div> ' +
+									'<div class="large-3 columns"> ' +
+									'<iframe frameborder="0" ' +
+									'        scrolling="no" ' +
+									'        id="chat_embed" ' +
+									'        src="http://twitch.tv/chat/embed?channel=' + randomStream.channel.name + '&amp;popout_chat=true" ' +
+									'        height="440" ' +
+									'        width="100%"> ' +
+									'</iframe> ' +
+									'</div> ' +
+									'</div> ' +
+									' ' +
+									'<div class="row fullWidth"> ' +
+	    							'	<div class="small-5 small-centered columns"> ' +
+									'		<div class="button-bar"> '+
+									'		  <ul class="button-group round"> '+
+									'		    <li><a href="#" id="followButton" class="large button purple">Follow</a></li> ' +
+									'		    <li><a href="#" id="nextButton" class="large button purple">Next Stream</a></li> ' +
+									'		  </ul> ' +
+									'		</div> ' +
+									'	</div> ' +
+									'</div> '
+
+								); // End append html
+
+								$('#nextButton').on('click', function() {
+								    clearHtml('#streamContainer');
+								    getRandomStream();
+								});
+
+								followButton();
+
+			            	} // End success clause
+						})
+					}); // end .ajax bs
+
+					// Set action bindings
+
+				}
+				 
+				// Return an object exposed to the public
+				return {
+
+					init: function () {
+						Twitch.init({clientId: clientId}, function(error, status) {
+						    // the sdk is now loaded
+
+						    twitchStatus = status.authenticated;
+
+						    if (status.authenticated) {
+								// Already logged in, hide button
+								$('#connectContainer').hide();
+							}
+						});
+
+						$('.close-connectContainer').on('click', function() {
+						    $('#connectContainer').hide();
+						});
+
+						$('.twitch-connect').click(function() {
+							Twitch.login({
+								scope: ['user_read', 'user_follows_edit']
+							});
+						});
+
+						getRandomStream();
+
+						console.log("Twich status: " + twitchStatus);
+						
+					},
+
+				};
+			})($);
+
+			TB.init();
+
+		</script>
+
+	</body>
+</html> 
+

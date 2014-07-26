@@ -176,13 +176,15 @@ var TB = (function ($) {
 						'</object> ' +
 						'</div> ' +
 						'<div class="large-3 columns"> ' +
+						( hasFlash ? 
 						'<iframe frameborder="0" ' +
 						'        scrolling="no" ' +
 						'        id="chat_embed" ' +
 						'        src="http://twitch.tv/chat/embed?channel=' + randomStream.channel.name + '&amp;popout_chat=true" ' +
 						'        height="440" ' +
 						'        width="100%"> ' +
-						'</iframe> ' +
+						'</iframe> '
+						: "" ) +
 						'</div> ' +
 						'</div> ' +
 						' ' +

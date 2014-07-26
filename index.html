@@ -16,152 +16,37 @@
 		<style type="text/css">
 			body {background-color: #ededed}
 			#headerContainer {padding: 24px 0;background-color: #d6d6d6; margin-bottom:24px;}
-			.fullWidth {
-			   width: 100%;
-			   margin-left: auto;
-			   margin-right: auto;
-			   max-width: 1400px;
-			}
-			.twitch-connect {cursor: pointer;}
+			.fullWidth {width: 100%;margin-left: auto;margin-right: auto;max-width: 1400px;}
+			.twitch-connect, .button {cursor: pointer;}
 			.button.purple {background: #6441a5;}
 			.button.purple:hover {background: #7550ba;}
 		</style>
 
 		<style>
 			.bubblingG {
-			margin: 160px auto 0 auto;
-			text-align: center;
-			width:260px;
-			height:163px;
+				margin: 160px auto 0 auto;
+				text-align: center;
+				width:260px;
+				height:163px;
 			}
 
-			.bubblingG span {
-			display: inline-block;
-			vertical-align: middle;
-			width: 33px;
-			height: 33px;
-			margin: 81px auto;
-			background: #6441A5;
-			-moz-border-radius: 163px;
-			-moz-animation: bubblingG 1.2s infinite alternate;
-			-webkit-border-radius: 163px;
-			-webkit-animation: bubblingG 1.2s infinite alternate;
-			-ms-border-radius: 163px;
-			-ms-animation: bubblingG 1.2s infinite alternate;
-			-o-border-radius: 163px;
-			-o-animation: bubblingG 1.2s infinite alternate;
-			border-radius: 163px;
-			animation: bubblingG 1.2s infinite alternate;
-			}
+			.bubblingG span {display: inline-block;vertical-align: middle;width: 33px;height: 33px;margin: 81px auto;background: #6441A5;-moz-border-radius: 163px;-moz-animation: bubblingG 1.2s infinite alternate;-webkit-border-radius: 163px;-webkit-animation: bubblingG 1.2s infinite alternate;-ms-border-radius: 163px;-ms-animation: bubblingG 1.2s infinite alternate;-o-border-radius: 163px;-o-animation: bubblingG 1.2s infinite alternate;border-radius: 163px;animation: bubblingG 1.2s infinite alternate;}
 
-			#bubblingG_1 {
-			-moz-animation-delay: 0s;
-			-webkit-animation-delay: 0s;
-			-ms-animation-delay: 0s;
-			-o-animation-delay: 0s;
-			animation-delay: 0s;
-			}
+			#bubblingG_1 {-moz-animation-delay: 0s;-webkit-animation-delay: 0s;-ms-animation-delay: 0s;-o-animation-delay: 0s;animation-delay: 0s;}
 
-			#bubblingG_2 {
-			-moz-animation-delay: 0.36s;
-			-webkit-animation-delay: 0.36s;
-			-ms-animation-delay: 0.36s;
-			-o-animation-delay: 0.36s;
-			animation-delay: 0.36s;
-			}
+			#bubblingG_2 {-moz-animation-delay: 0.36s;-webkit-animation-delay: 0.36s;-ms-animation-delay: 0.36s;-o-animation-delay: 0.36s;animation-delay: 0.36s;}
 
-			#bubblingG_3 {
-			-moz-animation-delay: 0.72s;
-			-webkit-animation-delay: 0.72s;
-			-ms-animation-delay: 0.72s;
-			-o-animation-delay: 0.72s;
-			animation-delay: 0.72s;
-			}
+			#bubblingG_3 {-moz-animation-delay: 0.72s;-webkit-animation-delay: 0.72s;-ms-animation-delay: 0.72s;-o-animation-delay: 0.72s;animation-delay: 0.72s;}
 
-			@-moz-keyframes bubblingG {
-			0% {
-			width: 33px;
-			height: 33px;
-			background-color:#6441A5;
-			-moz-transform: translateY(0);
-			}
+			@-moz-keyframes bubblingG {0% {width: 33px;height: 33px;background-color:#6441A5;-moz-transform: translateY(0);}100% {width: 78px;height: 78px;background-color:#EDEDED;-moz-transform: translateY(-68px);}}
 
-			100% {
-			width: 78px;
-			height: 78px;
-			background-color:#EDEDED;
-			-moz-transform: translateY(-68px);
-			}
+			@-webkit-keyframes bubblingG {0% {width: 33px;height: 33px;background-color:#6441A5;-webkit-transform: translateY(0);}100% {width: 78px;height: 78px;background-color:#EDEDED;-webkit-transform: translateY(-68px);}}
 
-			}
+			@-ms-keyframes bubblingG {0% {width: 33px;height: 33px;background-color:#6441A5;-ms-transform: translateY(0);}100% {width: 78px;height: 78px;background-color:#EDEDED;-ms-transform: translateY(-68px);}}
 
-			@-webkit-keyframes bubblingG {
-			0% {
-			width: 33px;
-			height: 33px;
-			background-color:#6441A5;
-			-webkit-transform: translateY(0);
-			}
+			@-o-keyframes bubblingG {0% {width: 33px;height: 33px;background-color:#6441A5;-o-transform: translateY(0);}100% {width: 78px;height: 78px;background-color:#EDEDED;-o-transform: translateY(-68px);}}
 
-			100% {
-			width: 78px;
-			height: 78px;
-			background-color:#EDEDED;
-			-webkit-transform: translateY(-68px);
-			}
-
-			}
-
-			@-ms-keyframes bubblingG {
-			0% {
-			width: 33px;
-			height: 33px;
-			background-color:#6441A5;
-			-ms-transform: translateY(0);
-			}
-
-			100% {
-			width: 78px;
-			height: 78px;
-			background-color:#EDEDED;
-			-ms-transform: translateY(-68px);
-			}
-
-			}
-
-			@-o-keyframes bubblingG {
-			0% {
-			width: 33px;
-			height: 33px;
-			background-color:#6441A5;
-			-o-transform: translateY(0);
-			}
-
-			100% {
-			width: 78px;
-			height: 78px;
-			background-color:#EDEDED;
-			-o-transform: translateY(-68px);
-			}
-
-			}
-
-			@keyframes bubblingG {
-			0% {
-			width: 33px;
-			height: 33px;
-			background-color:#6441A5;
-			transform: translateY(0);
-			}
-
-			100% {
-			width: 78px;
-			height: 78px;
-			background-color:#EDEDED;
-			transform: translateY(-68px);
-			}
-
-			}
+			@keyframes bubblingG {0% {width: 33px;height: 33px;background-color:#6441A5;transform: translateY(0);}100% {width: 78px;height: 78px;background-color:#EDEDED;transform: translateY(-68px);}}
 		</style>
 
 	</head>
@@ -241,6 +126,43 @@
 				    				 '</div> ' +
 				    				 '</div> ' +
 									 '');
+				}
+
+				function supportMobile() {
+					var a = !1,
+					    b = "";
+
+					function c(d) {
+					    d = d.match(/[\d]+/g);
+					    d.length = 3;
+					    return d.join(".")
+					}
+					if (navigator.plugins && navigator.plugins.length) {
+					    var e = navigator.plugins["Shockwave Flash"];
+					    e && (a = !0, e.description && (b = c(e.description)));
+					    navigator.plugins["Shockwave Flash 2.0"] && (a = !0, b = "2.0.0.11")
+					} else {
+					    if (navigator.mimeTypes && navigator.mimeTypes.length) {
+					        var f = navigator.mimeTypes["application/x-shockwave-flash"];
+					        (a = f && f.enabledPlugin) && (b = c(f.enabledPlugin.description))
+					    } else {
+					        try {
+					            var g = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7"),
+					                a = !0,
+					                b = c(g.GetVariable("$version"))
+					        } catch (h) {
+					            try {
+					                g = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6"), a = !0, b = "6.0.21"
+					            } catch (i) {
+					                try {
+					                    g = new ActiveXObject("ShockwaveFlash.ShockwaveFlash"), a = !0, b = c(g.GetVariable("$version"))
+					                } catch (j) {}
+					            }
+					        }
+					    }
+					}
+					var k = b;
+					return a ? true : false;
 				}
 
 				function followButton() {
@@ -336,11 +258,11 @@
 	    							'</div> ' +
 				            		'<div class="row fullWidth" style="margin-bottom:32px"> ' +
 	    							'<div class="large-9 columns"> ' +
-				            		'<object type="application/x-shockwave-flash" ' +
+				            		'<object type="' + ( supportMobile() ? "application/x-shockwave-flash" : "" ) + '" ' +
 									'        height="440" ' +
 									'        width="100%" ' +
 									'        id="live_embed_player_flash" ' +
-									'        data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=' + randomStream.channel.name + ' " ' +
+									'        data="' + ( supportMobile() ? ( "http://www.twitch.tv/widgets/live_embed_player.swf?channel=" + randomStream.channel.name ) : ( "http://www.twitch.tv/" + randomStream.channel.name + "/hls" ) ) + '" ' +
 									'        bgcolor="#000000"> ' +
 									'  <param  name="allowFullScreen" ' +
 									'          value="true" /> ' +
@@ -384,6 +306,8 @@
 								    clearHtml('#streamContainer');
 								    createSpinner('#streamContainer');
 								    getRandomStream();
+
+								    supportMobile() ? alert("Has flash") : alert("No flash");
 								});
 
 								followButton();

@@ -6,7 +6,7 @@ body {background-color: #ededed}
 .twitch-connect, .button {cursor: pointer;}
 .button.purple {background: #6441a5;}
 .button.purple:hover {background: #7550ba;}
-
+.middle{padding: 0 0 0 18px;}
 
 
 

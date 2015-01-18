@@ -106,7 +106,7 @@ var TB = (function ($) {
 				  		isFollowing = false;
 				  		$('#followButton').html("Follow");
 					  }
-					}); // onclick end
+					}); // onclick end 
 				  }); // end twitch.api
 				
 			});

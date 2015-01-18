@@ -150,7 +150,7 @@ var TB = (function ($) {
 						'<h4>' + (randomStream.channel.status || ' ') + '' +
 						'<small style="font-size:70%;margin-left: 20px;">' +
 						'	<span class=""><a href="' + randomStream.channel.url + '">' + randomStream.channel.display_name + '</a></span>' +
-						'	<span class="middle"> playing </span>' +
+						'	<span class="middle">playing </span>' +
 						'	<span class="">' + (randomStream.channel.game || 'unknown') + '</span>' +
 						'</small></h4>' +
 						'</div> ' +
